@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2023 Konrad Borowski <konrad@borowski.pw>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+when:
+  - event: pull_request
+  - event: push
+    branch:
+      - master
+
+steps:
+  reuse:
+    image: fsfe/reuse
+    commands:
+      - reuse lint
+  build:
+    image: "node:lts"
+    commands:
+      - npm ci
+      - npx tsc --noEmit
+      - npm run build
+  deploy:
+    image: bitnami/git
+    commands:
+      - mkdir ~/.ssh
+      - echo codeberg.org ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIVIC02vnjFyL+I4RHfvIGNtOgJMe769VTF1VR4EB3ZB > ~/.ssh/known_hosts
+      - echo "$DEPLOY_KEY" > ~/.ssh/id_ed25519
+      - chmod 400 ~/.ssh/id_ed25519
+      - git config --global user.name "Konrad Borowski"
+      - git config --global user.email konrad@borowski.pw
+      - git clone --single-branch --branch pages git@codeberg.org:$CI_REPO.git pages
+      - cd pages
+      - cp -ar ../dist/. .
+      - git add .
+      - git commit -m "Deploying from $CI_COMMIT_SHA" || true
+      - git push
+    secrets:
+      - deploy_key
+    when:
+      - event: push
+        branch:
+          - master
