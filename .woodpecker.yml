@@ -14,7 +14,7 @@ steps:
     commands:
       - reuse lint
   build:
-    image: "node:lts"
+    image: "node:20"
     commands:
       - npm ci
       - npx tsc --noEmit
