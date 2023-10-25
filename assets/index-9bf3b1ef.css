@@ -1,0 +1,1 @@
+body{display:flex;flex-direction:column;height:100vh;margin:0}#editor{overflow:auto;resize:vertical;height:50%}.cm-editor{height:100%}iframe{flex:1;border:#cdc7c2 solid;border-width:2px 0 0;resize:vertical}
