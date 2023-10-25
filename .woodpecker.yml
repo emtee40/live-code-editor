@@ -17,6 +17,7 @@ steps:
     image: "node:21"
     commands:
       - npm ci
+      - npx prettier . --check
       - npx tsc --noEmit
       - npm run build
   deploy:
