@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2023 Konrad Borowski <konrad@borowski.pw>
+# SPDX-FileCopyrightText: 2023 Kamila Borowska <kamila@borowska.pw>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -27,8 +27,8 @@ steps:
       - echo codeberg.org ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIVIC02vnjFyL+I4RHfvIGNtOgJMe769VTF1VR4EB3ZB > ~/.ssh/known_hosts
       - echo "$DEPLOY_KEY" > ~/.ssh/id_ed25519
       - chmod 400 ~/.ssh/id_ed25519
-      - git config --global user.name "Konrad Borowski"
-      - git config --global user.email konrad@borowski.pw
+      - git config --global user.name "Kamila Borowska"
+      - git config --global user.email kamila@borowska.pw
       - git clone --single-branch --branch pages git@codeberg.org:$CI_REPO.git pages
       - cd pages
       - cp -ar ../dist/. .
