@@ -10,18 +10,18 @@ when:
 
 steps:
   reuse:
-    image: fsfe/reuse
+    image: fsfe/reuse:2.1.0@sha256:888418362aa2a8ebea12d8dbfb41fa8eeabd0c423f42df7e3968af4cbb8d2ef1
     commands:
       - reuse lint
   build:
-    image: "node:21"
+    image: node:21.4.0@sha256:5758f6b5d1790ea1cb16223ec92e964bb3222d55787725e889c5c39e8d40f50f
     commands:
       - npm ci
       - npx prettier . --check
       - npx tsc --noEmit
       - npm run build
   deploy:
-    image: bitnami/git
+    image: bitnami/git:2.43.0@sha256:a8e11f1fdcb57ef7b2ab12995bb28b9060e7dbffa17f75136f523e92f6f270e0
     commands:
       - mkdir ~/.ssh
       - echo codeberg.org ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIVIC02vnjFyL+I4RHfvIGNtOgJMe769VTF1VR4EB3ZB > ~/.ssh/known_hosts
