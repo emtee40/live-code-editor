@@ -10,7 +10,7 @@ function onChange() {
   localStorage.setItem("code", doc);
   (document.getElementById("preview") as HTMLIFrameElement).srcdoc = doc;
 }
-var timeout: ReturnType<typeof setTimeout> | null = null;
+let timeout: ReturnType<typeof setTimeout> | null = null;
 function debounceChanges() {
   if (timeout) {
     clearTimeout(timeout);
