@@ -18,6 +18,7 @@ steps:
     commands:
       - npm ci
       - npx prettier . --check
+      - npx eslint .
       - npx tsc --noEmit
       - npm run build
   deploy:

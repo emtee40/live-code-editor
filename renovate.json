@@ -3,7 +3,14 @@
   "extends": ["config:recommended"],
   "packageRules": [
     {
-      "matchPackageNames": ["@types/node", "prettier", "typescript"],
+      "matchPackageNames": [
+        "@types/node",
+        "@typescript-eslint/eslint-plugin",
+        "@typescript-eslint/parser",
+        "eslint",
+        "prettier",
+        "typescript"
+      ],
       "automerge": true
     }
   ]
