@@ -14,7 +14,7 @@ steps:
     commands:
       - reuse lint
   build:
-    image: node:21.4.0@sha256:fdee4f1d341a7ffeb2b9f770293a9a216c7a72c962edbe08dffa493c27265a59
+    image: node:21.5.0@sha256:b632a1ec41a0927d19a432c525641b9a4451251d0b0b63f1d764810a562ea4e1
     commands:
       - npm ci
       - npx prettier . --check
