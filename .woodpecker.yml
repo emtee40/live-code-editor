@@ -22,7 +22,7 @@ steps:
       - npx tsc --noEmit
       - npm run build
   deploy:
-    image: bitnami/git:2.43.0@sha256:a8e11f1fdcb57ef7b2ab12995bb28b9060e7dbffa17f75136f523e92f6f270e0
+    image: bitnami/git:2.43.0@sha256:9b69e477c0db91107bc299e2342edf90fa6e7529535b703c9fa206a426a099ed
     commands:
       - mkdir ~/.ssh
       - echo codeberg.org ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIVIC02vnjFyL+I4RHfvIGNtOgJMe769VTF1VR4EB3ZB > ~/.ssh/known_hosts
