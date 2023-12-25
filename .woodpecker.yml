@@ -22,22 +22,13 @@ steps:
       - npx tsc --noEmit
       - npm run build
   deploy:
-    image: bitnami/git:2.43.0@sha256:83aa47b47293f0cf1a247021d64914ef97a2c18d4ee5d7d713fe93cf412a4e84
-    commands:
-      - mkdir ~/.ssh
-      - echo codeberg.org ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIVIC02vnjFyL+I4RHfvIGNtOgJMe769VTF1VR4EB3ZB > ~/.ssh/known_hosts
-      - echo "$DEPLOY_KEY" > ~/.ssh/id_ed25519
-      - chmod 400 ~/.ssh/id_ed25519
-      - git config --global user.name "Kamila Borowska"
-      - git config --global user.email kamila@borowska.pw
-      - git clone --single-branch --branch pages git@codeberg.org:$CI_REPO.git pages
-      - cd pages
-      - cp -ar ../dist/. .
-      - git add .
-      - git commit -m "Deploying from $CI_COMMIT_SHA" || true
-      - git push
+    image: kamilaborowska/plugin-codeberg-pages-deploy:0.1.0@sha256:13d097fec0ab72eebeb68a217557295af086be0f45fabb781e4df969d0c9a0bc
+    settings:
+      folder: dist
+      git_config_name: Kamila Borowska
+      git_config_email: kamila@borowska.pw
     secrets:
-      - deploy_key
+      - plugin_ssh_key
     when:
       - event: push
         branch:
