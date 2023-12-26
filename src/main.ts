@@ -17,7 +17,7 @@ function debounceChanges() {
   }
   timeout = setTimeout(function callOnChange() {
     onChange();
-  }, 300);
+  }, 150);
 }
 const language = new Compartment();
 const editor = new EditorView({
