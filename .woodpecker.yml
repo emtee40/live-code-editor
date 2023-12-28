@@ -27,8 +27,8 @@ steps:
       folder: dist
       git_config_name: Kamila Borowska
       git_config_email: kamila@borowska.pw
-    secrets:
-      - plugin_ssh_key
+      ssh_key:
+        from_secret: ssh_key
     when:
       - event: push
         branch:
