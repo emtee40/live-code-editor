@@ -22,7 +22,7 @@ steps:
       - npx tsc --noEmit
       - npm run build
   deploy:
-    image: kamilaborowska/plugin-codeberg-pages-deploy:0.2.0@sha256:f9d9ae55e6876ff55ae61019dd008fa4fc308e6e5c611e165ac9f98a4b2d1b38
+    image: codeberg.org/xfix/plugin-codeberg-pages-deploy:0.2.0@sha256:f9d9ae55e6876ff55ae61019dd008fa4fc308e6e5c611e165ac9f98a4b2d1b38
     settings:
       folder: dist
       git_config_name: Kamila Borowska
