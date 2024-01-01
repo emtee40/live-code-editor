@@ -13,14 +13,42 @@ steps:
     image: fsfe/reuse:2.1.0@sha256:888418362aa2a8ebea12d8dbfb41fa8eeabd0c423f42df7e3968af4cbb8d2ef1
     commands:
       - reuse lint
-  build:
-    image: node:21.5.0@sha256:b632a1ec41a0927d19a432c525641b9a4451251d0b0b63f1d764810a562ea4e1
+  npm-ci:
+    image: node:21.5.0-bookworm@sha256:b632a1ec41a0927d19a432c525641b9a4451251d0b0b63f1d764810a562ea4e1
     commands:
       - npm ci
+  prettier:
+    image: node:21.5.0-bookworm@sha256:b632a1ec41a0927d19a432c525641b9a4451251d0b0b63f1d764810a562ea4e1
+    commands:
       - npx prettier . --check
+    depends_on:
+      - npm-ci
+  eslint:
+    image: node:21.5.0-bookworm@sha256:b632a1ec41a0927d19a432c525641b9a4451251d0b0b63f1d764810a562ea4e1
+    commands:
       - npx eslint .
+    depends_on:
+      - npm-ci
+  tsc:
+    image: node:21.5.0-bookworm@sha256:b632a1ec41a0927d19a432c525641b9a4451251d0b0b63f1d764810a562ea4e1
+    commands:
       - npx tsc --noEmit
+    depends_on:
+      - npm-ci
+  build:
+    image: node:21.5.0-bookworm@sha256:b632a1ec41a0927d19a432c525641b9a4451251d0b0b63f1d764810a562ea4e1
+    commands:
       - npm run build
+    depends_on:
+      - npm-ci
+  vitest:
+    image: node:21.5.0-bookworm@sha256:b632a1ec41a0927d19a432c525641b9a4451251d0b0b63f1d764810a562ea4e1
+    commands:
+      - apt-get update
+      - apt-get install -y firefox-esr
+      - npx vitest
+    depends_on:
+      - build
   deploy:
     image: codeberg.org/xfix/plugin-codeberg-pages-deploy:1.0.0@sha256:8af4ca908e27d32fcb7e51c1af3544d044bbde5e11a31abbb78363f63172a187
     settings:
@@ -33,3 +61,8 @@ steps:
       - event: push
         branch:
           - master
+    depends_on:
+      - prettier
+      - eslint
+      - tsc
+      - vitest
