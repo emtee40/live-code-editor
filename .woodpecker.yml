@@ -32,7 +32,7 @@ steps:
   tsc:
     image: node:21.5.0-bookworm@sha256:b632a1ec41a0927d19a432c525641b9a4451251d0b0b63f1d764810a562ea4e1
     commands:
-      - npx tsc --noEmit
+      - npx tsc
     depends_on:
       - npm-ci
   build:
