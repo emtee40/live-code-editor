@@ -14,35 +14,35 @@ steps:
     commands:
       - reuse lint
   npm-ci:
-    image: node:21.5.0-bookworm@sha256:1f164f0b09e4ed367705243a41c00d8e3ead518de29c7d14e61d8f8d5e146e0e
+    image: node:21.6.0-bookworm@sha256:da59bb9ae9e5ffbe511cb7103b116af49e440c82875ebff9d043fbb03c4b7add
     commands:
       - npm ci
   prettier:
-    image: node:21.5.0-bookworm@sha256:1f164f0b09e4ed367705243a41c00d8e3ead518de29c7d14e61d8f8d5e146e0e
+    image: node:21.6.0-bookworm@sha256:da59bb9ae9e5ffbe511cb7103b116af49e440c82875ebff9d043fbb03c4b7add
     commands:
       - npx prettier . --check
     depends_on:
       - npm-ci
   eslint:
-    image: node:21.5.0-bookworm@sha256:1f164f0b09e4ed367705243a41c00d8e3ead518de29c7d14e61d8f8d5e146e0e
+    image: node:21.6.0-bookworm@sha256:da59bb9ae9e5ffbe511cb7103b116af49e440c82875ebff9d043fbb03c4b7add
     commands:
       - npx eslint .
     depends_on:
       - npm-ci
   tsc:
-    image: node:21.5.0-bookworm@sha256:1f164f0b09e4ed367705243a41c00d8e3ead518de29c7d14e61d8f8d5e146e0e
+    image: node:21.6.0-bookworm@sha256:da59bb9ae9e5ffbe511cb7103b116af49e440c82875ebff9d043fbb03c4b7add
     commands:
       - npx tsc
     depends_on:
       - npm-ci
   build:
-    image: node:21.5.0-bookworm@sha256:1f164f0b09e4ed367705243a41c00d8e3ead518de29c7d14e61d8f8d5e146e0e
+    image: node:21.6.0-bookworm@sha256:da59bb9ae9e5ffbe511cb7103b116af49e440c82875ebff9d043fbb03c4b7add
     commands:
       - npm run build
     depends_on:
       - npm-ci
   vitest:
-    image: node:21.5.0-bookworm@sha256:1f164f0b09e4ed367705243a41c00d8e3ead518de29c7d14e61d8f8d5e146e0e
+    image: node:21.6.0-bookworm@sha256:da59bb9ae9e5ffbe511cb7103b116af49e440c82875ebff9d043fbb03c4b7add
     commands:
       - apt-get update
       - apt-get install -y firefox-esr
